@@ -1,0 +1,71 @@
+{% raw %}
+\documentclass{article}
+
+% Load necessary packages
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{natbib}
+\usepackage{csquotes}
+\usepackage{stmaryrd}
+\usepackage{mathtools,amsfonts,amssymb,setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array} 
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{ragged2e}
+\usepackage{textgreek}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{lipsum}
+\usepackage{titlesec}
+
+\begin{document}
+
+\title{Operational long-term management of a salt cavern for industry targeted green H2 production}
+
+\author{Robinson Beaucour \\Paris-Saclay University}
+
+\maketitle
+
+
+\begin{center}
+    \includegraphics[width=0.4\textwidth]{03_Images/LITEN.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.4\textwidth]{03_Images/LogoCS.png}
+\end{center}
+
+\begin{abstract}
+    \small
+    Hydrogen and its derivatives such as ammonia are increasingly important for reducing carbon emissions in sectors with limited alternatives. Large production systems are generally preferred to reduce costs and for those, advanced management is a cornerstone to the project economic viability.
+    The present work explores the development of an Energy Management System for an industrial low-emission ammonia production platform. The latter is connected to the electrical grid and consists of 1.5 GW of renewable production units, around 500 MW of electrolyzers and storage facilities including especially a salt cavern for H2 storage. The long-term management of the salt cavern is decisive to enhance the profitability while satisfying industry related constraints such as the carbon content of the produced H2. The literature lacks in addressing both aspects simultaneously. 
+    Methodological approaches to tackle the long-term management and industrial constraints are proposed and compared. For the considered platform, it is shown that a strategy based on precalculated cost functions in the long term horizon allows relative gains of 2.5\% with respect to a state-of-the-art short term management leading to an annual cost saving of approximately \$6.2 million in the platform operational expenses. This translates to a reduction of the gap between the state-of-the-art and the optimal \textit{a posteriori} solution by about 82\%.
+\end{abstract}
+
+
+
+\clearpage
+\section{Introduction}
+\label{Intro}
+
+TEST TEST
+\input{01_Sections/01_Introduction/01_context.tex}
+
+\input{01_Sections/01_Introduction/02_state_of_the_art.tex}
+
+\section{System investigated and methods}
+\input{01_Sections/02_Methods/01_modeling_approach.tex}
+
+\clearpage
+\appendix
+
+\input{02_Appendix/01_MILP_model.tex}
+
+\input{02_Appendix/02_MILP_tolerance.tex}
+
+\bibliographystyle{elsarticle-num-names}
+\bibliography{ref}
+
+\end{document}
+{% endraw %}

@@ -1,0 +1,65 @@
+\section{MILP models} \label{app:model}
+The present Appendix describes the MILP modeling for the renewable production, grid, converters, compressors and storage.
+\subsection{Renewable production} \label{Renewable_production}
+
+PV and wind production are modeled with capacity factor time series considered as inputs for the optimization problem. Thus, no decision variables are related to renewable production.
+
+\subsection{Grid Flow} \label{Grid_Flow} \label{eq:F}
+Local electricity grid can consume (related to \textit{ElecCons}) or inject (related to \textit{ElecInj}) electricity from/to the global electricity grid. The local $H_2$ grid can sell $H_2$ (related to \textit{$H_2$sold}). If the platform does not satisfy production or $CO_2$ constraints (see Section \ref{specific_constraints}), it can "buy" expensive external green $H_2$ (related to \textit{$H_2$pen}). \textit{$H_2$pen} can be interpreted as a penalty to prevent unfeasabilty during the platform operation. Equations (\ref{eq:F1}) and (\ref{eq:F2}) set hourly cost and $CO_2$ emissions for each flow, system and instant. Equation (\ref{eq:F3}) sets flow constraints related to infrastructures limitation.
+
+\begin{equation} \tag{F.1} \label{eq:F1}
+    \textbf{F}_\textbf{t}^{\textbf{(sys,cost)}} = F^{(sys,sens)} \cdot F_t^{(sys,prices)} \cdot \textbf{F}_\textbf{t}^{\textbf{(sys,flow)}}
+\end{equation}
+\begin{equation} \tag{F.2} \label{eq:F2}
+    \textbf{F}_t^{(sys,CO2)} = F^{(sys,CO_2)} \cdot \textbf{F}_\textbf{t}^{\textbf{(sys,flow)}}
+\end{equation}
+\begin{equation} \tag{F.3} \label{eq:F3}
+    F^{(sys,min)} \leq \textbf{F}_\textbf{t}^{\textbf{(sys,flow)}} \leq F^{(sys,max)}
+\end{equation}
+
+\subsection{Converters} \label{Converter} \label{eq:C}
+In order to use local electricity grid, entities must change voltage through converter. Converters imply some losses as described in Equation (\ref{eq:C1}). Infrastructure limitations are modeled with Equation (\ref{eq:C2}).
+\begin{equation} \tag{C.1} \label{eq:C1}
+    \textbf{C}_\textbf{t}^{\textbf{(sys,out)}} = C^{(sys,eff)} \cdot \textbf{C}_\textbf{t}^{\textbf{(sys,in)}}
+\end{equation}
+\begin{equation} \tag{C.2} \label{eq:C2}
+    C^{(sys,min)} \leq \textbf{C}_\textbf{t}^{\textbf{(sys,in)}} \leq C^{(sys,max)}
+\end{equation}
+
+\subsection{Compressors} \label{Compressor} \label{eq:K}
+$H_2$ production from electrolyser is compressed before storing and/or selling. 
+Compressors uses electricity from local grid proportionnaly to $H_2$ flow (Equation (\ref{eq:K1})) with infrastrucure limitation (Equation (\ref{eq:K2})).
+\begin{equation} \tag{K.1} \label{eq:K1}
+    \textbf{K}_\textbf{t}^{\textbf{(sys,elec)}} = K^{(sys,coef)} \cdot \textbf{K}_\textbf{t}^{\textbf{(sys,H$_2$)}}
+\end{equation}
+\begin{equation} \tag{K.2} \label{eq:K2}
+    K^{(sys,min)} \leq \textbf{K}_\textbf{t}^{\textbf{(sys,H$_2$)}} \leq K^{(sys,max)}
+\end{equation}
+
+\subsection{Storage} \label{Storage} \label{eq:S}
+The platform includes electrical storage (battery) and $H_2$ storage (pipeline and cavern).
+A binary variable is introduced for each storage to prevent simultaneously charging and discharging. An initial state of energy (SOE) is set depending on the case study. Storages are modeled with the constraints in Equations (\ref{eq:S1}) to (\ref{eq:S6}).
+\begin{equation} \tag{S.1} \label{eq:S1}
+    \begin{split}
+        \forall t>1,\textbf{S}_\textbf{t}^{\textbf{(sys,SOE)}} - \textbf{S}_{t-1}^{(sys,SOE)} =~&  S^{(sys,StatLosses)} \cdot \textbf{S}_\textbf{t}^{\textbf{(sys,SOE)}} \\
+                    & + \frac{\textbf{S}_\textbf{t}^{\textbf{(sys,ChargeFlow)}} \cdot S^{(sys,ChargeEff)} - \frac{\textbf{S}_\textbf{t}^{\textbf{(sys,Disc.Flow)}}}{S^{(sys,Disc.Eff)}}}{S^{(sys,Capacity)}}
+    \end{split}
+\end{equation}
+\begin{equation} \tag{S.2} \label{eq:S2}
+    \begin{split}
+        \text{for } t=1,\textbf{S}_\textbf{t}^{\textbf{(sys,SOE)}} - S^{(sys,SOEini)} =~&  S^{(sys,StatLosses)} \cdot \textbf{S}_\textbf{t}^{\textbf{(sys,SOE)}} \\
+                    & + \frac{\textbf{S}_\textbf{t}^{\textbf{(sys,ChargeFlow)}} \cdot S^{(sys,ChargeEff)} - \frac{\textbf{S}_\textbf{t}^{\textbf{(sys,Disc.Flow)}}}{S^{(sys,Disc.Eff)}}}{S^{(sys,Capacity)}}
+    \end{split}
+\end{equation}
+\begin{equation} \tag{S.3} \label{eq:S3}
+    0 \leq \textbf{S}_\textbf{t}^{\textbf{(sys,ChargeFlow)}} \leq S^{(sys,ChargeMax)} \cdot \textbf{s}_\textbf{t}^{\textbf{(sys,state)}}
+\end{equation}
+\begin{equation} \tag{S.4} \label{eq:S4}
+    0 \leq \textbf{S}_\textbf{t}^{\textbf{(sys,Disc.Flow)}} \leq S^{(sys,Disc.Max)} \cdot (1-\textbf{s}_\textbf{t}^{\textbf{(sys,state)}})
+\end{equation}
+\begin{equation} \tag{S.5} \label{eq:S5}
+    \textbf{S}_\textbf{t}^{\textbf{(sys,Flow)}} = \textbf{S}_\textbf{t}^{\textbf{(sys,ChargeFlow)}} - \textbf{S}_\textbf{t}^{\textbf{(sys,Disc.Flow)}}
+\end{equation}
+\begin{equation} \tag{S.6} \label{eq:S6}
+    S^{(sys,MinSOE)} \leq \textbf{S}_\textbf{t}^{\textbf{(sys,SOE)}} \leq S^{(sys,MaxSOE)}
+\end{equation}

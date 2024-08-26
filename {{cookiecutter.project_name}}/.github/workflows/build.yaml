@@ -1,0 +1,64 @@
+name: LaTeX Build and Perl Script Execution
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  # First Job: Perl Operations
+  perl_operations:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install Perl
+      uses: shogo82148/actions-setup-perl@v1
+      with:
+        perl-version: "5.32"
+        distribution: strawberry
+
+    - name: Concatenate LaTeX Document (Perl script)
+      run: perl ./00_Scripts/latexpand.pl main.tex > main_concatenate.tex
+
+    - name: Run texcount (Perl script)
+      run: perl ./00_Scripts/texcount.pl main_concatenate.tex > count.txt
+
+    - name: Upload Perl Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: perl-output
+        path: |
+          main_concatenate.tex
+          count.txt
+
+  # Second Job: LaTeX Build
+  build_pdf:
+    runs-on: ubuntu-latest
+    needs: perl_operations
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Download Perl Artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: perl-output
+
+    - uses: xu-cheng/latex-action@v3
+      with:
+        root_file: main_concatenate.tex
+
+    - name: Upload PDF Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: pdf-output
+        path: |
+          main_concatenate.pdf

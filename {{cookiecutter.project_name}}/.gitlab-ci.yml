@@ -1,0 +1,93 @@
+# Variables that can be reused across different jobs
+variables:
+  TEX_FILE: "main.tex"
+  NEW_TEX_FILE: "new.tex"
+  OLD_TEX_FILE: "old.tex"
+  DIFF_TEX_FILE: "diff.tex"
+  COUNT_FILE: "count.txt"
+  NEW_PDF_FILE: "new.pdf"
+  DIFF_PDF_FILE: "diff.pdf"
+  LATEX_IMAGE: texlive/texlive:latest
+
+# Define the stages of the pipeline
+stages:
+  - process
+  - build
+  - diff_process
+  - diff_build
+
+# Main pipeline jobs
+process:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'  # On push to main
+    - if: '$CI_PIPELINE_SOURCE == "web"'  # On manual trigger
+  stage: process
+  image: perl:latest
+  script:
+    - perl ./00_Scripts/latexpand.pl $TEX_FILE > main_concatenate.tex
+    - perl ./00_Scripts/texcount.pl main_concatenate.tex > $COUNT_FILE
+  artifacts:
+    paths:
+      - main_concatenate.tex
+      - $COUNT_FILE
+
+build:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'  # On push to main
+    - if: '$CI_PIPELINE_SOURCE == "web"'  # On manual trigger
+  stage: build
+  image: $LATEX_IMAGE
+  script:
+    - latexmk -pdf main_concatenate.tex
+  artifacts:
+    paths:
+      - main_concatenate.pdf
+      - main_concatenate.tex
+      - $COUNT_FILE
+  dependencies:
+    - process
+
+diff_process:
+  rules:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "web"'  # On manual trigger
+  stage: diff_process
+  image: perl:latest
+  before_script:
+    - cpanm Algorithm::Diff # Install the Algorithm::Diff module
+  script:
+    - perl ./00_Scripts/latexpand.pl $TEX_FILE > $NEW_TEX_FILE
+    - perl ./00_Scripts/texcount.pl $NEW_TEX_FILE > $COUNT_FILE
+    - git fetch origin $CI_DEFAULT_BRANCH
+    - git restore --source origin/$CI_DEFAULT_BRANCH $TEX_FILE
+    - perl ./00_Scripts/latexpand.pl $TEX_FILE > $OLD_TEX_FILE
+    - perl ./00_Scripts/latexdiff.pl $OLD_TEX_FILE $NEW_TEX_FILE > $DIFF_TEX_FILE
+  artifacts:
+    paths:
+      - $NEW_TEX_FILE
+      - $OLD_TEX_FILE
+      - $DIFF_TEX_FILE
+      - $COUNT_FILE
+
+# Second job: Build PDFs from the diff and new .tex files
+diff_build:
+  rules:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "web"'  # On manual trigger
+  stage: diff_build
+  image: $LATEX_IMAGE
+  script:
+    - latexmk -pdf $NEW_TEX_FILE  # Build the new PDF
+    - latexmk -pdf $DIFF_TEX_FILE  # Build the diff PDF
+  artifacts:
+    paths:
+      - $NEW_PDF_FILE
+      - $DIFF_PDF_FILE
+      - $NEW_TEX_FILE
+      - $DIFF_TEX_FILE
+      - $COUNT_FILE
+  dependencies:
+    - diff_process
+

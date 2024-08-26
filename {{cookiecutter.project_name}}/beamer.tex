@@ -1,0 +1,231 @@
+{% raw %}
+\documentclass[10pt,presentation,shownotes,aspectratio=169,xcolor=dvipsnames]{beamer}
+\usetheme{Warsaw}
+\usecolortheme{crane} % Yellow and Blue color scheme
+\usepackage{beamerthemesplit}
+\usefonttheme{default}
+\setbeamertemplate{caption}[numbered]
+% \setbeamercolor{block body example}{bg=green!12}
+\setbeamercolor{palette primary}{bg=UBCred,fg=white}
+\setbeamercolor{palette secondary}{bg=UBCred,fg=white}
+\setbeamercolor{palette tertiary}{bg=UBCred,fg=white}
+\setbeamercolor{palette quaternary}{bg=UBCred,fg=white}
+\setbeamercolor{structure}{fg=UBCred} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=UBCred} % TOC sections
+
+\setbeamercolor{subsection in head/foot}{bg=UBClightred,fg=white}
+
+\setbeamertemplate{navigation symbols}{} % Uncomment to disable the bottom right navigation buttons
+% \setbeamercovered{transparent}
+\setbeamertemplate{theorems}[numbered]
+
+\definecolor{UBCred}{RGB}{244,16,32} % UBC red (primary)
+\definecolor{UBClightred}{RGB}{249,190,200} % UBC lighred (secondary)
+% THE FOLLOWING TEMPLATE IS FRAGILE: It is recommended you familiarise yourself with 
+% a rough idea of the presentation's framework before adding custom elements.
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+% \usepackage{quotchap}
+\usepackage{mathtools,amsfonts,amssymb,setspace}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{ragged2e}
+\usepackage{textgreek}
+\usepackage[export]{adjustbox}
+\usepackage{tikz} 
+\usepackage{caption}
+\usepackage{pstricks} 
+\usepackage{hyperref} 
+\usepackage{xcolor}
+
+\hypersetup{
+	colorlinks,
+	linkcolor={blue!50!black},
+	citecolor={blue!50!black},
+	urlcolor={blue!80!black}
+}
+\newcommand{\important}[1]{\textbf{\color{red}#1}}
+
+\usepackage{appendixnumberbeamer} % This resets the page count after the \appendix function is called, unlike the traditional appendix package (https://ctan.org/pkg/appendixnumberbeamer?lang=en)
+
+\usepackage[backend=biber,style=authoryear]{biblatex} % We use BiBLaTeX for our bibliography.
+
+\addbibresource{ref.bib}
+\AtEveryBibitem{\clearfield{urldate}}
+\AtEveryBibitem{\clearfield{langid}}
+\AtEveryBibitem{
+    \clearfield{urlyear}
+    \clearfield{urlmonth}
+    \clearfield{url}
+}
+
+\bibliography{references}
+% The lipsum package called in the next line is just for generating dummy text throughout this template and is not necessary.
+\usepackage{lipsum}
+
+% Note: Changes to specific presentation elements usually start with /makeatletter and ends with /makeatother
+
+% Defining an Example Block
+\makeatletter
+\def\th@remark{
+    \normalfont 
+    \setbeamercolor{block title example}{bg=orange,fg=black}
+    \setbeamercolor{block body example}{bg=orange!20,fg=black}
+    \def\inserttheoremblockenv{exampleblock}
+  }
+\makeatother
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+% Setting Header Properties
+\setbeamertemplate{headline}
+{
+  \leavevmode
+  \hbox{
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1ex,left,leftskip=1em]{section in head/foot}
+    \usebeamerfont{subsection in head/foot}\hspace*{2ex}\insertshorttitle
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1ex,center]{date in head/foot}
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2ex}
+  \end{beamercolorbox}}
+  \vskip0pt
+}
+
+
+% Setting Footer Properties
+\makeatletter
+\setbeamertemplate{footline}
+{ 
+  \leavevmode
+  \hbox{
+  \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}
+    \usebeamerfont{author in head/foot}\insertshortauthor~~\beamer@ifempty{\insertshortinstitute}{}{\insertshortinstitute}
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in head/foot}
+    \usebeamerfont{section in head/foot}\hspace*{1ex}\insertsectionhead\hspace*{1ex}
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right, rightskip=1em]{section in head/foot}
+    \usebeamerfont{section in head/foot}\insertsubsectionhead\hspace*{2ex}
+  \end{beamercolorbox}}
+  \vskip0pt
+}
+\makeatother
+
+
+% Defining when a title is required for a frame
+\makeatletter
+\setbeamertemplate{frametitle}{
+    \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}
+    \@tempdima=\textwidth
+    \advance\@tempdima by\beamer@leftmargin
+    \advance\@tempdima by\beamer@rightmargin
+    \begin{beamercolorbox}[sep=0.3cm,center,wd=\the\@tempdima]{frametitle}
+        \usebeamerfont{frametitle}
+        \vbox{}\vskip-1ex
+        \if@tempswa\else\csname beamer@ftecenter\endcsname\fi
+        \strut\insertframetitle\strut\par
+        {
+            \ifx\insertframesubtitle\@empty
+            \else
+            {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}
+            \fi
+        }
+        \vskip-1ex
+        \if@tempswa\else\vskip-.3cm\fi
+    \end{beamercolorbox}
+}
+\makeatother
+
+% This code displays a self-updating ToC at the beginning of every section.
+\AtBeginSection[]
+{
+	\begin{frame}
+	\frametitle{Table of Contents}
+	\tableofcontents[currentsection]
+	\end{frame}
+}
+
+\makeatletter
+\newcommand<>{\insertsubsectiontitle}{\frametitle{\insertsubsection}}
+\let\oldbeamer@checkframetitle\beamer@checkframetitle
+\renewcommand<>{\subsection}{
+  \gdef\beamer@checkframetitle{
+    \insertsubsectiontitle
+    \global\let\beamer@checkframetitle\oldbeamer@checkframetitle
+  }
+  \alt#1{\@ifnextchar[\beamer@subsection\beamer@@subsection}
+    {\beamer@secgobble}}
+\makeatother
+
+
+\makeatletter
+\newenvironment<>{proofs}[1][\proofname]{
+    \par
+    \def\insertproofname{#1\@addpunct{.}}
+    \usebeamertemplate{proof begin}#2}
+  {\usebeamertemplate{proof end}}
+\makeatother
+
+% Uncomment for some standard notations in math (Real, Complex and Rational numbers, Norm, Jacobian, etc) 
+% \newcommand{\reals}{\mathbb{R}}
+% \newcommand{\mtrx}{\mathbb{M}}
+% \newcommand{\jacobian}{\mathcal{J}}
+% \newcommand{\tallstrut}{\vphantom{\frac{5_A}{4,10^3}}}
+% \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+% \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                 TITLE PAGE, FILL IN FOR PLACEHOLDER TEXT                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Note: Longer input for Title Page, Abridged Input for Header and Footer
+
+\title[\color{white} Set small title
+\hspace{0.3cm}\insertframenumber/\inserttotalframenumber]{Operational long-term management of a salt cavern for industry targeted green H2 production}
+\author[Robinson Beaucour]{Robinson Beaucour}
+\institute[CEA-Liten]{CEA-Liten}
+\logo{
+\includegraphics[width=0.5cm]{03_Images/LOGO CEA_ORIGINAL.png}
+}
+% \date[]{[]}
+% (Major/Minor Project Presentation, Thesis Defense, etc.)
+\titlegraphic{
+    \includegraphics[width=0.4\textwidth]{03_Images/LITEN.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.4\textwidth]{03_Images/LogoCS.png}
+}
+
+% Document starts here
+\begin{document}
+
+\setlength{\belowcaptionskip}{10pt plus 2pt minus 4pt}
+
+% Title page
+\begin{frame}[plain]
+	\maketitle
+\end{frame}
+
+
+\section{Introduction}
+\label{Intro}
+
+\input{01_Sections_Beamer/01_Introduction/01_context.tex}
+
+\input{01_Sections_Beamer/01_Introduction/02_state_of_the_art.tex}
+
+\section{System investigated and methods}
+\input{01_Sections_Beamer/02_Methods/01_modeling_approach.tex}
+
+\AtNextBibliography{\small}
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+\printbibliography
+\end{frame}
+
+\end{document}
+{% endraw %}

@@ -1,0 +1,25 @@
+\subsection{State-of-the-art}
+
+\begin{frame}
+The existing literature offers a rich array of methodologies for constructing EMS \cite{weitzel_energy_2018}. As summarized by \cite{alabi_strategic_2023}, the two advanced EMS methodologies that can cope with the dynamic variations of smart energy systems are Model Predictive Control (MPC) and Reinforcement Learning (RL). The latter approaches are illustrated by \cite{stoffel_evaluation_2023}, in the context of building energy management systems, who compared traditional reactive expert rules to model-free RL, MPC based on white-box, gray-box and black-box modeling and approximate MPC. While RL seems promising, there are still scientific challenges to overcome such as its lake of explicability, the effective management of specific constraints and the necessary consequent offline training on precise simulators. Those are probably the reasons why the studies that have probed the domain of EMS tailored specifically to hydrogen production in industrial settings are based on MPC.
+\\
+\end{frame}
+
+\begin{frame}
+Among hierarchical approaches, \cite{petrollese_real-time_2016} and \cite{weber_model_2022} have explored EMS based on a combination of Optimal Generation Scheduling (OGS) and MPC. The OGS provides reference trajectories for energy storage levels, which the MPC aims to follow with incentives in the objective function. The reference trajectory is updated recursively when the energy system state changes.
+\\
+In \cite{petrollese_real-time_2016}, the system is a renewable hydrogen-based microgrid. It includes various energy storage systems, and the OGS provides objectives for battery and hydrogen storage levels, taking into account uncertainties in weather and load forecasting. The MPC component handles the real-time management, adjusting actions to meet these objectives while responding to current conditions.
+\\
+In \cite{weber_model_2022}, the EMS focuses on building climate control with seasonal energy storage, particularly a novel thermochemical storage. In this approach, the OGS sets energy storage targets, but rather than merely guiding the MPC, it imposes constraints that the MPC must respect. This distinction results in a different system dynamics where the MPC operates within stricter boundaries, leading to potentially longer computation times and infeasibilities.
+\end{frame}
+
+\begin{frame}
+Regarding the continuous approaches, \cite{abomazid_optimal_2022} crafted an EMS specifically tailored to tackle challenges arising from non-constant electrolyzer efficiency and seasonal fluctuations in renewable energy production. Through the implementation of a rolling-horizon methodology, their innovative EMS adeptly managed dynamic variables, underscoring its adaptability and efficacy in diverse operational contexts. Notably, their approach introduced a Z-score factor to signal seasonal trends in electricity prices to the EMS, marking an improvement in the integration of long-term strategy within a short-term vision.
+\\
+\cite{darivianakis_data-driven_2017} and \cite{thaler_hybrid_2023} studied the integration of a stored energy value into a traditional EMS. Specifically, \cite{thaler_hybrid_2023} developed a hybrid MPC strategy for a renewable microgrid with seasonal hydrogen storage. This EMS assigns a cost value to the hydrogen stored, serving as an incentive for long-term energy shifts. The study highlighted that even a simple constant value for stored hydrogen significantly enhances EMS performance. Their method determines the optimal hydrogen storage value by evaluating various scenarios, emphasizing the balance between production and consumption throughout the year.
+\end{frame}
+
+\begin{frame}
+Regarding EMS strategies including long term management but not in the field of hydrogen production, \cite{cuisinier_new_2022,cuisinier_impact_2023} presented a rolling horizon approach based on a MILP model that combines the short term, evaluated hourly, and the long term, evaluated at an arbitrarily longer interval.
+The sole decision variable for the long term becomes the variation in the State of Energy (SOE) of the long-term storage, a thermal pit storage associated to district heating in their case. This variable is employed by Cost Functions (CF), which represent the operational cost of the system for a given time interval and for a variation of storage SOE. These CF are precalculated based on numerous MILP models over Representative Periods (RP) of the long term horizon.
+\end{frame}

@@ -1,0 +1,10 @@
+\subsection{Modeling approach}
+\label{Models}
+
+\begin{frame}
+    The platform is modeled using a MILP formulation. The nomenclature of parameters and decision variables are described in \autoref{tab:system_parameters_and_DV}.
+    It uses the indice $sys$ for each type of system, with the set of indices for each type of system being described in \autoref{tab:system_description}.
+    Two renewable production systems are considered: photovoltaic (PV) and wind tubine (Wind). Five flow systems are considered: electricity consumed from global grid (ElecCons), electricity injected to the global grid (ElecInj), electricity curtailed from renewables (ElecCurt), $H_2$ sold from the local grid ($H_2$sold), $H_2$ bought or penalties ($H_2$pen).
+    Three converters are used, namely for renewable (Ren), electrolysers (Ely), compressors (Comp). Three storages are used, namely battery, pipeline, salt cavern (Cavern). In the remainder of the paper, decision variables of the MILP problem are written in bold while binary variables are written in lower case.\\
+    The MILP modeling for the renewable production, grid, converters, compressors and storage is rather common and thus described in \ref{app:model}. As detailed in \ref{app:model}, the grid, converters, compressors and storage sets of equations are respectively denoted \textit{F}, \textit{C}, \textit{K} and \textit{S}.
+\end{frame}

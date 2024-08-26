@@ -1,0 +1,10 @@
+{
+    "project_name": "Stage Robinson Beaucour 2024",
+    "title": "Operational long-term management of a salt cavern for industry targeted green H2 production",
+    "abstract": "An abstract to paste",
+    "author_name": "First Name Last Name",
+    "author_email": "youremail@example.com",
+    "institute": "Paris-Saclay University",
+    "documentclass":["book (for thesis or large report)","article (for scientific paper or small report)","elsarticle (for elsevier publication)","beamer (for presentation)"],
+    "workflow":["github","gitlab","None"]
+  }

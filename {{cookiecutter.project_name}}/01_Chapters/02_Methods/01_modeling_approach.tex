@@ -12,42 +12,6 @@ The MILP modeling for the renewable production, grid, converters, compressors an
     \caption{Parameters and decision variables}
     \begin{tabular}{|p{3.5cm}p{6.5cm}p{5cm}|}
     \hline
-    \multicolumn{3}{|c|}{\textbf{(E) Renewable production}} \\[0.3cm]
-$E_t^{(sys,power)}$                   &  Capacity factor at $t$ produced by $sys$                   & $ [MW/MW_c]$ \\ 
-    $E^{(sys,capacity)}$                  & Capacity installed of $sys$                                 &  $[MW]$ \\
-    $E^{(sys,CO_2)}$                      & $CO_2$ intensity of $sys$                                   & $[tCO_2/MWh]$ \\
-    \multicolumn{3}{|c|}{\textbf{(F) Grid flow}} \\[0.3cm]
-$F_t^{(sys,prices)}$                  & Price of $sys$ flow at $t$                     & $[\$/MWh]$ or $[\$/tH_2]$ \\
-    $F^{(sys,max/min)}$                   & Max/Min flow of $sys$                          & $ [MW]$ or $ [tH_2/h]$ \\
-    $F^{(sys,sens)}$                      & Sens of $sys$ : 1 if input, -1 if output       &  \\
-    $F^{(sys,CO_2)}$                      & $CO_2$ intensity of $sys$                      & $[tCO_2/MWh]$ or $[tCO_2/tH_2]$ \\[0.3cm]
-$\textbf{F}_\textbf{t}^{\textbf{(sys,flow)}}$           & Flow of $sys$ at $t$                     & $[MW]$ or $[tH_2/h]$ \\
-    $\textbf{F}_\textbf{t}^{\textbf{(sys,cost)}}$           & Cost of $sys$ flow at $t$                & $[\$]$ \\
-    $\textbf{F}_\textbf{t}^{\textbf{(sys,CO$_2$)}}$            & $CO_2$ emits by $sys$ flow at $t$        & $[tCO_2]$ \\[0.3cm]
-    \multicolumn{3}{|c|}{\textbf{(C) Converter}} \\[0.3cm]
-$C^{(sys,eff)}$           & Conversion efficiency of $sys$                         & $[-]$ \\
-    $C^{(sys,max/min)}$       & Max/Min conversion of $sys$                            & $[MW]$ \\[0.3cm]
-$\textbf{C}_\textbf{t}^{\textbf{(sys,in)}}$             & Input flow of $sys$ converter at $t$       & $[MW]$ \\
-    $\textbf{C}_\textbf{t}^{\textbf{(sys,out)}}$            & Output flow of $sys$ converter at $t$      & $[MW]$ \\[0.3cm]
-    \multicolumn{3}{|c|}{\textbf{(K) Compressor}} \\[0.3cm]
-$K^{(sys,coef)}$          & Coefficient conversion of $sys$                            & $[MW/(tH_2/h)]$ \\
-    $K^{(sys,max/min)}$       & Max/Min flow of $sys$                                      & $[MW]$ \\[0.3cm]
-$\textbf{K}_\textbf{t}^{\textbf{(sys,elec)}}$           & Electricity of $sys$ compressor at $t$       & $[MW]$ \\
-    $\textbf{K}_\textbf{t}^{\textbf{(sys,H$_2$)}}$            & $H_2$ flow through $sys$ compressor at $t$   & $[MW]$ \\[0.3cm]
-    \multicolumn{3}{|c|}{\textbf{(S) Storage}} \\[0.3cm]
-    $S^{(sys,ChargeEff)}$             & Charge efficiency of $sys$                         & $[-]$ \\
-    $S^{(sys,Disc.Eff)}$              & Discharge efficiency of $sys$                      & $[-]$ \\
-    $S^{(sys,StatLosses)}$            & Static Losses of $sys$                             & $[-]$ \\
-    $S^{(sys,ChargeMax)}$             & Max charge of $sys$                                & $ [MW]$ or $ [tH_2/h]$ \\
-    $S^{(sys,Disc.Max)}$              & Max discharge of $sys$                             & $ [MW]$ or $ [tH_2/h]$ \\
-    $S^{(sys,Max/MinSOE)}$            & Max/MIN SOE of $sys$                               & $[-]$ \\
-    $S^{(sys,SOEini)}$                & SOE initial of $sys$                               & $[-]$ \\
-    $S^{(sys,Capacity)}$              & Capacity of $sys$                                  & $[tH_2]$ or $[MWh]$ \\[0.3cm]
-    $\textbf{S}_\textbf{t}^{\textbf{(sys,SOE)}}$        & SOE of $sys$ storage at $t$                        & $[-]$ \\
-    $\textbf{S}_\textbf{t}^{\textbf{(sys,ChargeFlow)}}$ & Charge flow of $sys$ storage at $t$                    & $[MW]$ \\
-    $\textbf{S}_\textbf{t}^{\textbf{(sys,Disc.Flow)}}$  & Discharge flow of $sys$ storage at $t$                 & $[MW]$ \\
-    $\textbf{S}_\textbf{t}^{\textbf{(sys,Flow)}}$       & Flow of $sys$ storage at $t$                           & $[MW]$ \\
-    $\textbf{s}_\textbf{t}^{\textbf{(sys,state)}}$      & state of $sys$ storage at $t$ : 0 if charging else 1   &  \\[0.3cm]
     \multicolumn{3}{|c|}{\textbf{(L) Electrolyser}} \\[0.3cm]
     $L^{(k,max/min)}$                   & Max/Min power of the $k^{th}$ electrolyser                                        & $[MW]$ \\
     $L^{(k,AuxBase)}$                   & Base electricity consumption of the $k^{th}$ electrolyser                         & $[MW]$ \\

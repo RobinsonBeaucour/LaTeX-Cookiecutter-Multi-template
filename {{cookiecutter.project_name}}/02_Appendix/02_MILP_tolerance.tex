@@ -3,9 +3,6 @@ In this Appendix, the impact of the modeling of the electrolysers with SOS2 vari
 \begin{equation*}
      \text{Gap}_t = \textbf{L}_\textbf{t}^{\textbf{(k,elec)}} \cdot \alpha_i^{(k)} - \textbf{l}_\textbf{t}^{\textbf{(k,state)}} \cdot \beta_i^{(k)} - \textbf{L}_\textbf{t}^{\textbf{(k,H$_2$)}}
 \end{equation*}
-Despite minor deviations, the solutions remain close to the operating curve, attesting to the effectiveness and reliability of the MILP-based optimization approaches in achieving near-optimal EMS operation while adhering to constraints.\\
-
-It is worth mentioning here that for all the results obtained, the solver used is CPLEX 22.1.0 and the relative gap between the solution returned and the optimal solution is notably small, with a value of 0.01 for both the \textit{Myopic} and \textit{Price Signal} approaches and an even smaller value of 0.001 for the \textit{Multiple RP-CF approach}. The reduced tolerance for RP-CF can be attributed to the consideration of long-term cost, requiring higher precision in the optimization process.
 
 \begin{figure}
     \centering

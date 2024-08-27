@@ -26,7 +26,7 @@ Cookiecutter 1.4.0 or higher):
 
     pip install -U cookiecutter
 
-Generate a Python package project:
+Generate a LaTeX project:
 
     cookiecutter https://github.com/RobinsonBeaucour/LaTeX-Cookiecutter-Multi-template.git
 

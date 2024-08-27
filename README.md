@@ -45,6 +45,15 @@ The template follows the below structure :
     ├── 02_Appendix                 <- Contains appendix used as input in main.tex
     └── 03_Images                   <- Contains images used as input in main.tex
 
+## Documentclass
+
+| Documentclass | Typical use case                         | Example of specific feature    | Documentation                    |
+|---------------|------------------------------------------|--------------------------------|----------------------------------|
+| article       | Small or medium report, scientific paper | \begin{abstract}\end{abstract} | https://www.ctan.org/pkg/article |
+| beamer        | For slides                               | For slides                     | https://www.ctan.org/pkg/beamer  |
+| book          | Thesis, large report                     | \chapter                       | https://www.ctan.org/pkg/book    |
+| elsarticle    | Scientif paper for Elsevier              | \begin{keyword}\end{keyword}   | https://ctan.org/pkg/elsarticle  |
+
 ## Recommanded setup
 
 * Local IDE : [VS code](https://code.visualstudio.com/)

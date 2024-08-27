@@ -1,5 +1,4 @@
-{% raw %}
-\documentclass[10pt,presentation,shownotes,aspectratio=169,xcolor=dvipsnames]{beamer}
+{% raw %}\documentclass[10pt,presentation,shownotes,aspectratio=169,xcolor=dvipsnames]{beamer}
 \usetheme{Warsaw}
 \usecolortheme{crane} % Yellow and Blue color scheme
 \usepackage{beamerthemesplit}
@@ -96,7 +95,6 @@
   \vskip0pt
 }
 
-
 % Setting Footer Properties
 \makeatletter
 \setbeamertemplate{footline}
@@ -115,7 +113,6 @@
   \vskip0pt
 }
 \makeatother
-
 
 % Defining when a title is required for a frame
 \makeatletter
@@ -162,7 +159,6 @@
     {\beamer@secgobble}}
 \makeatother
 
-
 \makeatletter
 \newenvironment<>{proofs}[1][\proofname]{
     \par
@@ -186,9 +182,9 @@
 % Note: Longer input for Title Page, Abridged Input for Header and Footer
 
 \title[\color{white} Set small title
-\hspace{0.3cm}\insertframenumber/\inserttotalframenumber]{Operational long-term management of a salt cavern for industry targeted green H2 production}
-\author[Robinson Beaucour]{Robinson Beaucour}
-\institute[CEA-Liten]{CEA-Liten}
+\hspace{0.3cm}\insertframenumber/\inserttotalframenumber]{{% endraw %}{{ cookiecutter.title }}{% raw %}}
+\author[{% endraw %}{{ cookiecutter.author_name }}{% raw %}]{{% endraw %}{{ cookiecutter.author_name }}{% raw %}}
+\institute[{% endraw %}{{ cookiecutter.institute }}{% raw %}]{{% endraw %}{{ cookiecutter.institute }}{% raw %}}
 \logo{
 \includegraphics[width=0.5cm]{03_Images/LOGO CEA_ORIGINAL.png}
 }
@@ -209,7 +205,6 @@
 \begin{frame}[plain]
 	\maketitle
 \end{frame}
-
 
 \section{Introduction}
 \label{Intro}

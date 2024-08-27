@@ -1,5 +1,4 @@
-{% raw %}
-\documentclass{article}
+{% raw %}\documentclass{article}
 
 % Load necessary packages
 \usepackage[margin=1.5cm]{geometry}
@@ -23,12 +22,10 @@
 
 \begin{document}
 
-\title{Operational long-term management of a salt cavern for industry targeted green H2 production}
-
-\author{Robinson Beaucour \\Paris-Saclay University}
+\title{{% endraw %}{{ cookiecutter.title }}{% raw %}}
+\author{{% endraw %}{{ cookiecutter.author_name }}{% raw %}\\{% endraw %}{{ cookiecutter.institute }}{% raw %}}
 
 \maketitle
-
 
 \begin{center}
     \includegraphics[width=0.4\textwidth]{03_Images/LITEN.png}
@@ -37,13 +34,8 @@
 \end{center}
 
 \begin{abstract}
-    \small
-    Hydrogen and its derivatives such as ammonia are increasingly important for reducing carbon emissions in sectors with limited alternatives. Large production systems are generally preferred to reduce costs and for those, advanced management is a cornerstone to the project economic viability.
-    The present work explores the development of an Energy Management System for an industrial low-emission ammonia production platform. The latter is connected to the electrical grid and consists of 1.5 GW of renewable production units, around 500 MW of electrolyzers and storage facilities including especially a salt cavern for H2 storage. The long-term management of the salt cavern is decisive to enhance the profitability while satisfying industry related constraints such as the carbon content of the produced H2. The literature lacks in addressing both aspects simultaneously. 
-    Methodological approaches to tackle the long-term management and industrial constraints are proposed and compared. For the considered platform, it is shown that a strategy based on precalculated cost functions in the long term horizon allows relative gains of 2.5\% with respect to a state-of-the-art short term management leading to an annual cost saving of approximately \$6.2 million in the platform operational expenses. This translates to a reduction of the gap between the state-of-the-art and the optimal \textit{a posteriori} solution by about 82\%.
+    {% endraw %}{{ cookiecutter.abstract }}{% raw %}
 \end{abstract}
-
-
 
 \clearpage
 \section{Introduction}
